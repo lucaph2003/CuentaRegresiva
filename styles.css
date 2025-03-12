@@ -9,6 +9,7 @@ body {
     text-align: center;
 }
 .contador-container {
+    margin-top: 10px;
     background: rgba(0, 0, 0, 0.6);
     padding: 20px;
     border-radius: 10px;
