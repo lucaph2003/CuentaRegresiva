@@ -1,12 +1,12 @@
 body {
     background: linear-gradient(135deg, #1f1c2c, #928dab);
     color: white;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    padding-bottom: 20px;
 }
 .contador-container {
     margin-top: 10px;

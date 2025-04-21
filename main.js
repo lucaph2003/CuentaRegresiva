@@ -9,6 +9,12 @@ function actualizarCuentaRegresiva() {
     const diferenciaPsj = fechaObjetivoPsj - ahora;
     const mesesRestantesPsj = Math.floor(diferenciaPsj / (1000 * 60 * 60 * 24 * 30)); 
 
+    const fechaObjetivo_Dops = new Date("2025-06-30T21:00:00").getTime();
+    const diferencia_Dops = fechaObjetivo_Dops - ahora;
+
+    const fechaObjetivo_Dda = new Date("2025-06-18T21:00:00").getTime();
+    const diferencia_Dda = fechaObjetivo_Dda - ahora;
+
 
     const fecha300DiasAntes = new Date(fechaObjetivo - (300 * 24 * 60 * 60 * 1000)).toLocaleDateString();
     const fecha200DiasAntes = new Date(fechaObjetivo - (200 * 24 * 60 * 60 * 1000)).toLocaleDateString();
@@ -42,9 +48,23 @@ function actualizarCuentaRegresiva() {
     const minutosPsj = Math.floor((diferenciaPsj % (1000 * 60 * 60)) / (1000 * 60));
     const segundosPsj = Math.floor((diferenciaPsj % (1000 * 60)) / 1000);
 
+    const dias_Dops = Math.floor(diferencia_Dops / (1000 * 60 * 60 * 24));
+    const horas_Dops = Math.floor((diferencia_Dops % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutos_Dops = Math.floor((diferencia_Dops % (1000 * 60 * 60)) / (1000 * 60));
+    const segundos_Dops = Math.floor((diferencia_Dops % (1000 * 60)) / 1000);
+
+    const dias_Dda = Math.floor(diferencia_Dda / (1000 * 60 * 60 * 24));
+    const horas_Dda = Math.floor((diferencia_Dda % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutos_Dda = Math.floor((diferencia_Dda % (1000 * 60 * 60)) / (1000 * 60));
+    const segundos_Dda = Math.floor((diferencia_Dda % (1000 * 60)) / 1000);
+
     document.getElementById("contador").innerHTML = `${dias}d ${horas}h ${minutos}m ${segundos}s`;
 
     document.getElementById("contador-Psj").innerHTML = `${diasPsj}d ${horasPsj}h ${minutosPsj}m ${segundosPsj}s`;
+
+    document.getElementById("contador-Dops").innerHTML = `${dias_Dops}d ${horas_Dops}h ${minutos_Dops}m ${segundos_Dops}s`;
+
+    document.getElementById("contador-Dda").innerHTML = `${dias_Dda}d ${horas_Dda}h ${minutos_Dda}m ${segundos_Dda}s`;
 
     document.getElementById("MesesRestantes").innerHTML = mesesRestantes;
         
