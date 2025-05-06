@@ -16,7 +16,7 @@ function actualizarCuentaRegresiva() {
     const diferencia_Dda = fechaObjetivo_Dda - ahora;
 
 
-    const fecha300DiasAntes = new Date(fechaObjetivo - (300 * 24 * 60 * 60 * 1000)).toLocaleDateString();
+    const fecha300DiasAntes = new Date(fechaObjetivo - (250 * 24 * 60 * 60 * 1000)).toLocaleDateString();
     const fecha200DiasAntes = new Date(fechaObjetivo - (200 * 24 * 60 * 60 * 1000)).toLocaleDateString();
     const fecha150DiasAntes = new Date(fechaObjetivo - (150 * 24 * 60 * 60 * 1000)).toLocaleDateString();
     const fecha100DiasAntes = new Date(fechaObjetivo - (100 * 24 * 60 * 60 * 1000)).toLocaleDateString();
