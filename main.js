@@ -10,9 +10,13 @@ function actualizarCuentaRegresiva() {
     const mesesRestantesFecha2 = Math.floor(diferenciaFecha2 / (1000 * 60 * 60 * 24 * 30)); 
 
 
-    const fechaObjetivoPsj = new Date("2025-08-15T20:00:00").getTime();
+    const fechaObjetivoPsj = new Date("2025-08-06T20:00:00").getTime();
     const diferenciaPsj = fechaObjetivoPsj - ahora;
     const mesesRestantesPsj = Math.floor(diferenciaPsj / (1000 * 60 * 60 * 24 * 30)); 
+
+    const fechaFinAnio = new Date("2025-12-31T20:00:00").getTime();
+    const diferenciaFinAnio = fechaFinAnio - ahora;
+    const mesesRestantesFinAnio = Math.floor(diferenciaFinAnio / (1000 * 60 * 60 * 24 * 30)); 
 
     const fecha200DiasAntes = new Date(fechaObjetivo - (200 * 24 * 60 * 60 * 1000)).toLocaleDateString();
     const fecha150DiasAntes = new Date(fechaObjetivo - (150 * 24 * 60 * 60 * 1000)).toLocaleDateString();
@@ -56,17 +60,26 @@ function actualizarCuentaRegresiva() {
     const minutosPsj = Math.floor((diferenciaPsj % (1000 * 60 * 60)) / (1000 * 60));
     const segundosPsj = Math.floor((diferenciaPsj % (1000 * 60)) / 1000);
 
+    const diasFinAnio = Math.floor(diferenciaFinAnio / (1000 * 60 * 60 * 24));
+    const horasFinAnio = Math.floor((diferenciaFinAnio % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutosFinAnio = Math.floor((diferenciaFinAnio % (1000 * 60 * 60)) / (1000 * 60));
+    const segundosFinAnio = Math.floor((diferenciaFinAnio % (1000 * 60)) / 1000);
+
     document.getElementById("contador").innerHTML = `${dias}d ${horas}h ${minutos}m ${segundos}s`;
 
     document.getElementById("contador-fecha2").innerHTML = `${diasFecha2}d ${horasFecha2}h ${minutosFecha2}m ${segundosFecha2}s`;
 
     document.getElementById("contador-Psj").innerHTML = `${diasPsj}d ${horasPsj}h ${minutosPsj}m ${segundosPsj}s`;
+
+    document.getElementById("contador-FinAnio").innerHTML = `${diasFinAnio}d ${horasFinAnio}h ${minutosFinAnio}m ${segundosFinAnio}s`;
     
     document.getElementById("MesesRestantes").innerHTML = mesesRestantes;
 
     document.getElementById("MesesRestantes-fecha2").innerHTML = mesesRestantesFecha2;
         
     document.getElementById("MesesRestantesPsj").innerHTML = mesesRestantesPsj;
+
+    document.getElementById("MesesRestantes-FinAnio").innerHTML = mesesRestantesFinAnio;
 
     document.getElementById("Fecha200").innerHTML = fecha200DiasAntes;
     document.getElementById("Fecha150").innerHTML = fecha150DiasAntes;
