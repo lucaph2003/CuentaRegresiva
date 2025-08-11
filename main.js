@@ -8,6 +8,10 @@ function actualizarCuentaRegresiva() {
     const diferenciaFinAnio = fechaFinAnio - ahora;
     const mesesRestantesFinAnio = Math.floor(diferenciaFinAnio / (1000 * 60 * 60 * 24 * 30)); 
 
+    const fechaBrasil = new Date("2026-03-27T12:00:00").getTime();
+    const diferenciaBrasil = fechaBrasil - ahora;
+    const mesesRestantesBrasil = Math.floor(diferenciaBrasil / (1000 * 60 * 60 * 24 * 30)); 
+
     const fecha200DiasAntes = new Date(fechaObjetivo - (200 * 24 * 60 * 60 * 1000)).toLocaleDateString();
     const fecha150DiasAntes = new Date(fechaObjetivo - (150 * 24 * 60 * 60 * 1000)).toLocaleDateString();
     const fecha100DiasAntes = new Date(fechaObjetivo - (100 * 24 * 60 * 60 * 1000)).toLocaleDateString();
@@ -22,6 +26,18 @@ function actualizarCuentaRegresiva() {
         return;
     }
 
+     if (diferenciaFinAnio <= 0) {
+        document.getElementById("contador-FinAnio").innerHTML = "¡Tiempo alcanzado!";
+        clearInterval(intervalo);
+        return;
+    }
+
+     if (mesesRestantesBrasil <= 0) {
+        document.getElementById("contador-Brasil").innerHTML = "¡Tiempo alcanzado!";
+        clearInterval(intervalo);
+        return;
+    }
+
     const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
     const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
@@ -32,13 +48,22 @@ function actualizarCuentaRegresiva() {
     const minutosFinAnio = Math.floor((diferenciaFinAnio % (1000 * 60 * 60)) / (1000 * 60));
     const segundosFinAnio = Math.floor((diferenciaFinAnio % (1000 * 60)) / 1000);
 
+    const diasBrasil = Math.floor(diferenciaBrasil / (1000 * 60 * 60 * 24));
+    const horasBrasil = Math.floor((diferenciaBrasil % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutosBrasil = Math.floor((diferenciaBrasil % (1000 * 60 * 60)) / (1000 * 60));
+    const segundosBrasil = Math.floor((diferenciaBrasil % (1000 * 60)) / 1000);
+
     document.getElementById("contador").innerHTML = `${dias}d ${horas}h ${minutos}m ${segundos}s`;
 
     document.getElementById("contador-FinAnio").innerHTML = `${diasFinAnio}d ${horasFinAnio}h ${minutosFinAnio}m ${segundosFinAnio}s`;
+
+    document.getElementById("contador-Brasil").innerHTML = `${diasBrasil}d ${horasBrasil}h ${minutosBrasil}m ${segundosBrasil}s`;
     
     document.getElementById("MesesRestantes").innerHTML = mesesRestantes;
 
     document.getElementById("MesesRestantes-FinAnio").innerHTML = mesesRestantesFinAnio;
+
+    document.getElementById("MesesRestantes-Brasil").innerHTML = mesesRestantesBrasil;
 
     document.getElementById("Fecha200").innerHTML = fecha200DiasAntes;
     document.getElementById("Fecha150").innerHTML = fecha150DiasAntes;
