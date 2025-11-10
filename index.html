@@ -3,82 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuenta Regresiva</title>
+    <title>Cronograma 2026</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=2.0.0">
+    <meta name="description" content="Cuenta regresiva para fechas importantes del cronograma académico 2026">
 </head>
 <body>
+    <div class="main-container">
+        <!-- Page Header -->
+        <header class="page-title">
+            <h1>Cronograma 2026</h1>
+            <p class="subtitle">Fechas importantes</p>
+        </header>
 
-    <div class="contador-container">
-        <h1>Cuenta Regresiva 2026!</h1>
-        <h2 id="contador-FinAnio">Cargando...</h2>
-        <h3>Meses: <span id="MesesRestantes-FinAnio"></span></h3>
+        <!-- Main Countdowns Grid -->
+        <section class="countdown-grid">
+            <!-- Fin de Año 2025 -->
+            <article class="contador-container priority-low">
+                <h2 class="countdown-title">Fin de Año 2025</h2>
+                <div class="time-display" id="contador-FinAnio">Cargando...</div>
+                <div class="months-display">
+                    Meses restantes: <span class="months-value" id="MesesRestantes-FinAnio">--</span>
+                </div>
+            </article>
+
+            <!-- Primera Entrega -->
+            <article class="contador-container priority-medium">
+                <h2 class="countdown-title">Primera Entrega</h2>
+                <p class="text-muted mb-2">16 de Noviembre, 2025</p>
+                <div class="time-display" id="contador-primerEntrega">Cargando...</div>
+                <div class="months-display">
+                    Meses restantes: <span class="months-value" id="MesesRestantes-primerEntrega">--</span>
+                </div>
+            </article>
+
+            <!-- Segunda Entrega -->
+            <article class="contador-container priority-medium">
+                <h2 class="countdown-title">Segunda Entrega</h2>
+                <p class="text-muted mb-2">15 de Diciembre, 2025</p>
+                <div class="time-display" id="contador-segundaEntrega">Cargando...</div>
+                <div class="months-display">
+                    Meses restantes: <span class="months-value" id="MesesRestantes-segundaEntrega">--</span>
+                </div>
+            </article>
+
+            <!-- Entrega Final -->
+            <article class="contador-container priority-high">
+                <h2 class="countdown-title">Entrega Final</h2>
+                <p class="text-muted mb-2">10 de Febrero, 2026</p>
+                <div class="time-display" id="contador-entregaFinal">Cargando...</div>
+                <div class="months-display">
+                    Meses restantes: <span class="months-value" id="MesesRestantes-entregaFinal">--</span>
+                </div>
+            </article>
+
+            <!-- Entrega Definitiva -->
+            <article class="contador-container priority-high">
+                <h2 class="countdown-title">Entrega Definitiva</h2>
+                <p class="text-muted mb-2">6 de Abril, 2026</p>
+                <div class="time-display" id="contador-entregaDefinitiva">Cargando...</div>
+                <div class="months-display">
+                    Meses restantes: <span class="months-value" id="MesesRestantes-entregaDefinitiva">--</span>
+                </div>
+            </article>
+
+            <!-- Fecha Principal -->
+            <article class="contador-container priority-high">
+                <h2 class="countdown-title">Fecha Principal</h2>
+                <p class="text-muted mb-2">28 de Abril, 2026</p>
+                <div class="time-display" id="contador">Cargando...</div>
+                <div class="months-display">
+                    Meses restantes: <span class="months-value" id="MesesRestantes">--</span>
+                </div>
+            </article>
+        </section>
+
+        <!-- Milestones Section -->
+        <section class="milestone-container">
+            <h3 class="milestone-title">Fechas Clave (desde Fecha Principal)</h3>
+            <div class="milestone-grid">
+                <div class="milestone-item">
+                    <div class="milestone-label">150 días antes</div>
+                    <div class="milestone-date" id="Fecha150">--</div>
+                </div>
+                <div class="milestone-item">
+                    <div class="milestone-label">100 días antes</div>
+                    <div class="milestone-date" id="Fecha100">--</div>
+                </div>
+                <div class="milestone-item">
+                    <div class="milestone-label">75 días antes</div>
+                    <div class="milestone-date" id="Fecha75">--</div>
+                </div>
+                <div class="milestone-item">
+                    <div class="milestone-label">50 días antes</div>
+                    <div class="milestone-date" id="Fecha50">--</div>
+                </div>
+                <div class="milestone-item">
+                    <div class="milestone-label">25 días antes</div>
+                    <div class="milestone-date" id="Fecha25">--</div>
+                </div>
+                <div class="milestone-item">
+                    <div class="milestone-label">10 días antes</div>
+                    <div class="milestone-date" id="Fecha10">--</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center mt-4" style="margin-top: 30px; color: rgba(255, 255, 255, 0.6);">
+            <p>Actualizado cada segundo</p>
+        </footer>
     </div>
 
-    <div class="contador-container">
-        <h1>Cuenta Regresiva Brasil</h1>
-        <h2 id="contador-Brasil">Cargando...</h2>
-        <h3>Meses: <span id="MesesRestantes-Brasil"></span></h3>
-    </div>
-
-    <div class="contador-container">
-        <h1>Cuenta Regresiva 28/04/2026</h1>
-        <h2 id="contador">Cargando...</h2>
-        <h3>Meses: <span id="MesesRestantes"></span></h3>
-    </div>
-
-    <div class="contador-container">
-        <h4>200 Dias Restantes: <b id="Fecha200"></b></h4>
-        <h4>150 Dias Restantes: <b id="Fecha150"></b></h4>
-        <h4>100 Dias Restantes: <b id="Fecha100"></b></h4>
-        <h4>75 Dias Restantes: <b id="Fecha75"></b></h4>
-        <h4>50 Dias Restantes: <b id="Fecha50"></b></h4>
-        <h4>25 Dias Restantes: <b id="Fecha25"></b></h4>
-        <h4>10 Dias Restantes: <b id="Fecha10"></b></h4>
-    </div>
-
-    <div class="contador-container">
-        <h1>Presentacion 17/09/2025</h1>
-        <h2 id="contador-presentacion">Cargando...</h2>
-        <h3>Meses: <span id="MesesRestantes-Presentacion"></span></h3>
-    </div>
-
-    <div class="contador-container">
-        <h1>Aceptacion y Tutor 30/09/2025</h1>
-        <h2 id="contador-aceptacion">Cargando...</h2>
-        <h3>Meses: <span id="MesesRestantes-aceptacion"></span></h3>
-    </div>
-
-    <div class="contador-container">
-        <h1>Acta 22/10/2025</h1>
-        <h2 id="contador-acta">Cargando...</h2>
-        <h3>Meses: <span id="MesesRestantes-acta"></span></h3>
-    </div>
-
-    <div class="contador-container">
-        <h1>Primer Entrega 16/11/2025</h1>
-        <h2 id="contador-primerEntrega">Cargando...</h2>
-        <h3>Meses: <span id="MesesRestantes-primerEntrega"></span></h3>
-    </div>
-
-    <div class="contador-container">
-        <h1>Segunda Entrega 15/12/2025</h1>
-        <h2 id="contador-segundaEntrega">Cargando...</h2>
-        <h3>Meses: <span id="MesesRestantes-segundaEntrega"></span></h3>
-    </div>
-
-    <div class="contador-container">
-        <h1>Entrega Final 10/02/2026</h1>
-        <h2 id="contador-entregaFinal">Cargando...</h2>
-        <h3>Meses: <span id="MesesRestantes-entregaFinal"></span></h3>
-    </div>
-
-    <div class="contador-container">
-        <h1>Entrega Definitiva 06/04/2026</h1>
-        <h2 id="contador-entregaDefinitiva">Cargando...</h2>
-        <h3>Meses: <span id="MesesRestantes-entregaDefinitiva"></span></h3>
-    </div>
-
+    <!-- Scripts -->
+    <script src="main.js?v=2.2.0"></script>
 </body>
-<script src="main.js?v=1.0.5"></script>
 </html>
