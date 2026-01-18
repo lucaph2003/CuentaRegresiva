@@ -33,7 +33,7 @@ const FECHAS = {
     entregaFinal: new Date("2026-02-10T21:00:00"),
     entregaDefinitiva: new Date("2026-04-06T21:00:00"),
     casamiento: new Date("2026-02-24T12:00:00"),
-    fiesta: new Date("2026-01-28T21:00:00")
+    fiesta: new Date("2026-02-28T21:00:00")
 };
 
 // Calculate time difference
