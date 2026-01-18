@@ -1,11 +1,39 @@
+// Conversor de moneda ARS <-> EUR usando Frankfurter API
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('currencyForm');
+    if (!form) return;
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const amount = parseFloat(document.getElementById('amount').value);
+        const direction = document.getElementById('direction').value;
+        const resultDiv = document.getElementById('currencyResult');
+        resultDiv.textContent = 'Convirtiendo...';
+        let from, to;
+        if (direction === 'ARS_EUR') {
+            from = 'ARS';
+            to = 'EUR';
+        } else {
+            from = 'EUR';
+            to = 'ARS';
+        }
+        try {
+            const res = await fetch(`https://api.frankfurter.app/latest?amount=${amount}&from=${from}&to=${to}`);
+            if (!res.ok) throw new Error('Error en la conversión');
+            const data = await res.json();
+            const converted = data.rates[to];
+            resultDiv.textContent = `${amount} ${from} = ${converted} ${to}`;
+        } catch (err) {
+            resultDiv.textContent = 'No se pudo realizar la conversión.';
+        }
+    });
+});
 // Target dates for countdowns
 const FECHAS = {
-    finAnio: new Date("2025-12-31T20:00:00"),
     principal: new Date("2026-04-28T12:00:00"),
-    primerEntrega: new Date("2025-11-16T21:00:00"),
-    segundaEntrega: new Date("2025-12-15T21:00:00"),
     entregaFinal: new Date("2026-02-10T21:00:00"),
-    entregaDefinitiva: new Date("2026-04-06T21:00:00")
+    entregaDefinitiva: new Date("2026-04-06T21:00:00"),
+    casamiento: new Date("2026-02-24T12:00:00"),
+    fiesta: new Date("2026-01-28T21:00:00")
 };
 
 // Calculate time difference
@@ -45,7 +73,21 @@ function actualizarContador(fecha, idContador, idMeses) {
     // Format time display
     const timeString = `${tiempo.dias}d ${String(tiempo.horas).padStart(2, '0')}h ${String(tiempo.minutos).padStart(2, '0')}m ${String(tiempo.segundos).padStart(2, '0')}s`;
     elementoContador.textContent = timeString;
-    elementoMeses.textContent = tiempo.meses;
+
+    // Mostrar meses y días restantes en formato "X meses y Y días"
+    let meses = tiempo.meses;
+    let diasRestantes = tiempo.dias - (meses * 30);
+    if (diasRestantes < 0) diasRestantes = 0;
+    let mesesDiasString = "";
+    if (meses > 0) {
+        mesesDiasString += `${meses} mes${meses === 1 ? '' : 'es'}`;
+        if (diasRestantes > 0) {
+            mesesDiasString += ` y ${diasRestantes} día${diasRestantes === 1 ? '' : 's'}`;
+        }
+    } else {
+        mesesDiasString = `${diasRestantes} día${diasRestantes === 1 ? '' : 's'}`;
+    }
+    elementoMeses.textContent = mesesDiasString;
 }
 
 // Update milestone dates
@@ -65,12 +107,11 @@ function actualizarHitos() {
 // Main update function
 function actualizarCuentaRegresiva() {
     // Update all countdowns
-    actualizarContador(FECHAS.finAnio, "contador-FinAnio", "MesesRestantes-FinAnio");
     actualizarContador(FECHAS.principal, "contador", "MesesRestantes");
-    actualizarContador(FECHAS.primerEntrega, "contador-primerEntrega", "MesesRestantes-primerEntrega");
-    actualizarContador(FECHAS.segundaEntrega, "contador-segundaEntrega", "MesesRestantes-segundaEntrega");
     actualizarContador(FECHAS.entregaFinal, "contador-entregaFinal", "MesesRestantes-entregaFinal");
     actualizarContador(FECHAS.entregaDefinitiva, "contador-entregaDefinitiva", "MesesRestantes-entregaDefinitiva");
+    actualizarContador(FECHAS.casamiento, "contador-casamiento", "MesesRestantes-casamiento");
+    actualizarContador(FECHAS.fiesta, "contador-fiesta", "MesesRestantes-fiesta");
 }
 
 // Initialize when page loads
