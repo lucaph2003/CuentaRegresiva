@@ -1,4 +1,4 @@
-// Conversor de moneda ARS <-> EUR usando Frankfurter API
+// Conversor de moneda UYU <-> EUR usando exchangerate.host
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('currencyForm');
     if (!form) return;
@@ -9,18 +9,22 @@ document.addEventListener('DOMContentLoaded', function() {
         const resultDiv = document.getElementById('currencyResult');
         resultDiv.textContent = 'Convirtiendo...';
         let from, to;
-        if (direction === 'ARS_EUR') {
-            from = 'ARS';
+        if (direction === 'UYU_EUR') {
+            from = 'UYU';
             to = 'EUR';
         } else {
             from = 'EUR';
-            to = 'ARS';
+            to = 'UYU';
         }
         try {
-            const res = await fetch(`https://api.frankfurter.app/latest?amount=${amount}&from=${from}&to=${to}`);
+            const apiKey = "e29d1216117f75962230f0e2c89ea392";
+            const url = `https://api.exchangerate.host/convert?from=${from}&to=${to}&amount=${amount}&access_key=${apiKey}`;
+            const res = await fetch(url);
             if (!res.ok) throw new Error('Error en la conversión');
             const data = await res.json();
-            const converted = data.rates[to];
+            console.log(data);
+            
+            const converted = data.result;
             resultDiv.textContent = `${amount} ${from} = ${converted} ${to}`;
         } catch (err) {
             resultDiv.textContent = 'No se pudo realizar la conversión.';
