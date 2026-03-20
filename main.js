@@ -1,43 +1,9 @@
-// Conversor de moneda UYU <-> EUR usando exchangerate.host
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('currencyForm');
-    if (!form) return;
-    form.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const amount = parseFloat(document.getElementById('amount').value);
-        const direction = document.getElementById('direction').value;
-        const resultDiv = document.getElementById('currencyResult');
-        resultDiv.textContent = 'Convirtiendo...';
-        let from, to;
-        if (direction === 'UYU_EUR') {
-            from = 'UYU';
-            to = 'EUR';
-        } else {
-            from = 'EUR';
-            to = 'UYU';
-        }
-        try {
-            const apiKey = "e29d1216117f75962230f0e2c89ea392";
-            const url = `https://api.exchangerate.host/convert?from=${from}&to=${to}&amount=${amount}&access_key=${apiKey}`;
-            const res = await fetch(url);
-            if (!res.ok) throw new Error('Error en la conversión');
-            const data = await res.json();
-            console.log(data);
-            
-            const converted = data.result;
-            resultDiv.textContent = `${amount} ${from} = ${converted} ${to}`;
-        } catch (err) {
-            resultDiv.textContent = 'No se pudo realizar la conversión.';
-        }
-    });
-});
 // Target dates for countdowns
 const FECHAS = {
+    brasil: new Date("2026-03-28T14:00:00"),
     principal: new Date("2026-04-28T12:00:00"),
-    entregaFinal: new Date("2026-02-10T21:00:00"),
     entregaDefinitiva: new Date("2026-04-06T21:00:00"),
-    casamiento: new Date("2026-02-24T12:00:00"),
-    fiesta: new Date("2026-02-28T21:00:00")
+    secundaria: new Date("2026-05-11T12:00:00")
 };
 
 // Calculate time difference
@@ -96,12 +62,22 @@ function actualizarContador(fecha, idContador, idMeses) {
 
 // Update milestone dates
 function actualizarHitos() {
+    // Principal
     const fechaPrincipal = FECHAS.principal.getTime();
-    const hitos = [150, 100, 75, 50, 25, 10];
-
+    const hitos = [50, 25, 10];
     hitos.forEach(dias => {
         const fechaHito = new Date(fechaPrincipal - (dias * 24 * 60 * 60 * 1000));
         const elemento = document.getElementById(`Fecha${dias}`);
+        if (elemento) {
+            elemento.textContent = fechaHito.toLocaleDateString('es-ES');
+        }
+    });
+
+    // Secundaria
+    const fechaSecundaria = FECHAS.secundaria.getTime();
+    hitos.forEach(dias => {
+        const fechaHito = new Date(fechaSecundaria - (dias * 24 * 60 * 60 * 1000));
+        const elemento = document.getElementById(`FechaSecundaria${dias}`);
         if (elemento) {
             elemento.textContent = fechaHito.toLocaleDateString('es-ES');
         }
@@ -111,19 +87,51 @@ function actualizarHitos() {
 // Main update function
 function actualizarCuentaRegresiva() {
     // Update all countdowns
+    actualizarContador(FECHAS.brasil, "contador-brasil", "MesesRestantes-brasil");
     actualizarContador(FECHAS.principal, "contador", "MesesRestantes");
-    actualizarContador(FECHAS.entregaFinal, "contador-entregaFinal", "MesesRestantes-entregaFinal");
     actualizarContador(FECHAS.entregaDefinitiva, "contador-entregaDefinitiva", "MesesRestantes-entregaDefinitiva");
-    actualizarContador(FECHAS.casamiento, "contador-casamiento", "MesesRestantes-casamiento");
-    actualizarContador(FECHAS.fiesta, "contador-fiesta", "MesesRestantes-fiesta");
+    actualizarContador(FECHAS.secundaria, "contador-secundaria", "MesesRestantes-secundaria");
 }
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
-    // Initial update
+    // Initialize countdown
     actualizarCuentaRegresiva();
     actualizarHitos();
     
-    // Update every second
+    // Update countdowns every second
     setInterval(actualizarCuentaRegresiva, 1000);
+
+    // Initialize currency converter
+    const form = document.getElementById('currencyForm');
+    if (form) {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const amount = parseFloat(document.getElementById('amount').value);
+            const direction = document.getElementById('direction').value;
+            const resultDiv = document.getElementById('currencyResult');
+            resultDiv.textContent = 'Convirtiendo...';
+            let from, to;
+            if (direction === 'UYU_EUR') {
+                from = 'UYU';
+                to = 'EUR';
+            } else {
+                from = 'EUR';
+                to = 'UYU';
+            }
+            try {
+                const apiKey = "e29d1216117f75962230f0e2c89ea392";
+                const url = `https://api.exchangerate.host/convert?from=${from}&to=${to}&amount=${amount}&access_key=${apiKey}`;
+                const res = await fetch(url);
+                if (!res.ok) throw new Error('Error en la conversión');
+                const data = await res.json();
+                console.log(data);
+                
+                const converted = data.result;
+                resultDiv.textContent = `${amount} ${from} = ${converted} ${to}`;
+            } catch (err) {
+                resultDiv.textContent = 'No se pudo realizar la conversión.';
+            }
+        });
+    }
 });
