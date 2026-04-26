@@ -1,9 +1,9 @@
 // Target dates for countdowns
 const FECHAS = {
-    brasil: new Date("2026-03-28T14:00:00"),
-    principal: new Date("2026-04-28T12:00:00"),
-    entregaDefinitiva: new Date("2026-04-06T21:00:00"),
-    secundaria: new Date("2026-05-11T12:00:00")
+    secundaria: new Date("2026-05-11T21:45:00"),
+    espana: new Date("2026-05-12T14:35:00"),
+    tren: new Date("2026-05-12T18:30:00"),
+    valencia: new Date("2026-05-12T20:30:00")
 };
 
 // Calculate time difference
@@ -62,19 +62,9 @@ function actualizarContador(fecha, idContador, idMeses) {
 
 // Update milestone dates
 function actualizarHitos() {
-    // Principal
-    const fechaPrincipal = FECHAS.principal.getTime();
-    const hitos = [50, 25, 10];
-    hitos.forEach(dias => {
-        const fechaHito = new Date(fechaPrincipal - (dias * 24 * 60 * 60 * 1000));
-        const elemento = document.getElementById(`Fecha${dias}`);
-        if (elemento) {
-            elemento.textContent = fechaHito.toLocaleDateString('es-ES');
-        }
-    });
-
-    // Secundaria
+    // Solo Secundaria
     const fechaSecundaria = FECHAS.secundaria.getTime();
+    const hitos = [50, 25, 10];
     hitos.forEach(dias => {
         const fechaHito = new Date(fechaSecundaria - (dias * 24 * 60 * 60 * 1000));
         const elemento = document.getElementById(`FechaSecundaria${dias}`);
@@ -86,11 +76,11 @@ function actualizarHitos() {
 
 // Main update function
 function actualizarCuentaRegresiva() {
-    // Update all countdowns
-    actualizarContador(FECHAS.brasil, "contador-brasil", "MesesRestantes-brasil");
-    actualizarContador(FECHAS.principal, "contador", "MesesRestantes");
-    actualizarContador(FECHAS.entregaDefinitiva, "contador-entregaDefinitiva", "MesesRestantes-entregaDefinitiva");
+    // Update all countdowns (Secundaria, España, Tren y Valencia)
     actualizarContador(FECHAS.secundaria, "contador-secundaria", "MesesRestantes-secundaria");
+    actualizarContador(FECHAS.espana, "contador-espana", "MesesRestantes-espana");
+    actualizarContador(FECHAS.tren, "contador-tren", "MesesRestantes-tren");
+    actualizarContador(FECHAS.valencia, "contador-valencia", "MesesRestantes-valencia");
 }
 
 // Initialize when page loads
